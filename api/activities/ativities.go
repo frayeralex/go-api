@@ -6,9 +6,9 @@ import (
 	"github.com/frayeralex/go-api/config"
 	"github.com/frayeralex/go-api/db"
 	. "github.com/frayeralex/go-api/models"
-	"github.com/globalsign/mgo/bson"
 	"github.com/go-bongo/bongo"
 	"github.com/gorilla/mux"
+	"gopkg.in/mgo.v2/bson"
 	"net/http"
 )
 
