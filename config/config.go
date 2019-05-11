@@ -10,6 +10,8 @@ var MongoConfig = &bongo.Config{
 	Database: "test",
 }
 
+var PORT = os.Getenv("PORT")
+
 const (
 	Activities = "activities"
 )

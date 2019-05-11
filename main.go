@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/frayeralex/go-api/config"
 	"github.com/frayeralex/go-api/db"
 	"github.com/frayeralex/go-api/router"
 	"log"
@@ -13,5 +14,5 @@ func main() {
 	fmt.Println("CONNECTION SUCCESS")
 	router.InitRouting()
 
-	log.Fatal(http.ListenAndServe(":8000", router.Handler))
+	log.Fatal(http.ListenAndServe(":" + config.PORT, router.Handler))
 }
