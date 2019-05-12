@@ -3,7 +3,6 @@ package activities
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/frayeralex/go-api/config"
 	"github.com/frayeralex/go-api/db"
 	. "github.com/frayeralex/go-api/models"
 	"github.com/go-bongo/bongo"
@@ -13,7 +12,7 @@ import (
 )
 
 func getCollection() *bongo.Collection {
-	return db.Connection.Collection(config.Activities)
+	return db.Connection.Collection(db.Activities)
 }
 
 func GetAll(writer http.ResponseWriter, request *http.Request)  {

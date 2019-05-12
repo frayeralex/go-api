@@ -1,7 +1,6 @@
 package db
 
 import (
-	"github.com/frayeralex/go-api/config"
 	"github.com/go-bongo/bongo"
 	"log"
 )
@@ -9,7 +8,7 @@ import (
 var Connection bongo.Connection
 
 func Connect() {
-	connection, err := bongo.Connect(config.MongoConfig)
+	connection, err := bongo.Connect(MongoConfig)
 	if err != nil {
 		log.Fatal(err)
 	}
