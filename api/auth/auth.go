@@ -34,7 +34,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if !user.CheckPassword(cred.Password) {
+	if err := user.CheckPassword(cred.Password); err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		_ = json.NewEncoder(w).Encode(map[string]string{
 			"msg": "Invalid credentials",

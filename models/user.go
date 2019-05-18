@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/go-bongo/bongo"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct {
@@ -17,8 +18,15 @@ type Credentials struct {
 	Password string `json:"password"`
 }
 
-func (u User) CheckPassword(password string) bool {
-	return u.Password == password
+func (u User) CheckPassword(password string) error {
+	err := bcrypt.CompareHashAndPassword([]byte(u.Password), []byte(password))
+	return err
+}
+
+func (u *User) hashPassword() error {
+	hash, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.MinCost)
+	u.Password = string(hash)
+	return err
 }
 
 func (u *User) Validate(*bongo.Collection) []error {
@@ -31,4 +39,14 @@ func (u *User) Validate(*bongo.Collection) []error {
 	}
 	fmt.Println("Validate", len(u.Username), err)
 	return err
+}
+
+func (u *User) BeforeSave(*bongo.Collection) error {
+	if u.IsNew() {
+		err := u.hashPassword()
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
