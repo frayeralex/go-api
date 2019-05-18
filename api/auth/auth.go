@@ -16,12 +16,17 @@ func getCollection() *bongo.Collection {
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
+	err := validateCredentials(w, r)
+	if err != nil {
+		return
+	}
+
 	w.Header().Set("Content-Type", "application/json")
 	var cred Credentials
 	var user User
 	_ = json.NewDecoder(r.Body).Decode(&cred)
 
-	err := getCollection().FindOne(bson.M{
+	err = getCollection().FindOne(bson.M{
 		"username": cred.Username,
 	}, &user)
 

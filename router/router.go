@@ -10,12 +10,13 @@ var ActivityRouter *mux.Router
 var AuthRouter *mux.Router
 
 func InitRouting() {
-	Handler.Use(LoggingMiddleware)
+	Handler.Use(loggingMiddleware)
+	Handler.Use(jsonMiddleware)
 
 	api := Handler.PathPrefix("/api").Subrouter()
 	BooksRouter = api.PathPrefix("/books").Subrouter()
 	ActivityRouter = api.PathPrefix("/activities").Subrouter()
-	ActivityRouter.Use(AuthMiddleware)
+	ActivityRouter.Use(authMiddleware)
 
 	AuthRouter = api.PathPrefix("/auth").Subrouter()
 

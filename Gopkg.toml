@@ -53,3 +53,7 @@
 [[constraint]]
   branch = "master"
   name = "golang.org/x/crypto"
+
+[[constraint]]
+  name = "github.com/thedevsaddam/govalidator"
+  version = "1.9.6"

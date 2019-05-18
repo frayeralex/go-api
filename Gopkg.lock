@@ -53,6 +53,14 @@
   version = "v1.0.0"
 
 [[projects]]
+  digest = "1:66556cc8b0e653163aba0b610772b268215da4d6439e3d273264e7ba651a25e4"
+  name = "github.com/thedevsaddam/govalidator"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "0413a0eb80cac8ab2d666639130658ce49a0c967"
+  version = "v1.9.6"
+
+[[projects]]
   branch = "master"
   digest = "1:9d5b5d543996dd584da1db1e0de1926f3e4c3a8dba0fa2f8db70f3ebee2342e0"
   name = "golang.org/x/crypto"
@@ -85,6 +93,7 @@
     "github.com/globalsign/mgo/bson",
     "github.com/go-bongo/bongo",
     "github.com/gorilla/mux",
+    "github.com/thedevsaddam/govalidator",
     "golang.org/x/crypto/bcrypt",
     "gopkg.in/mgo.v2/bson",
   ]
