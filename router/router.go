@@ -2,28 +2,24 @@ package router
 
 import (
 	"github.com/gorilla/mux"
-	"log"
-	"net/http"
 )
-
-func loggingMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		log.Println(r.Method, r.RequestURI)
-		next.ServeHTTP(w, r)
-	})
-}
 
 var Handler = mux.NewRouter()
 var BooksRouter *mux.Router
 var ActivityRouter *mux.Router
+var AuthRouter *mux.Router
 
 func InitRouting() {
-	Handler.Use(loggingMiddleware)
+	Handler.Use(LoggingMiddleware)
 
 	api := Handler.PathPrefix("/api").Subrouter()
 	BooksRouter = api.PathPrefix("/books").Subrouter()
 	ActivityRouter = api.PathPrefix("/activities").Subrouter()
+	ActivityRouter.Use(AuthMiddleware)
+
+	AuthRouter = api.PathPrefix("/auth").Subrouter()
 
 	BooksRoutesInit(BooksRouter)
-	ActivitiesRotesInit(ActivityRouter)
+	ActivitiesRoutesInit(ActivityRouter)
+	AuthRoutesInit(AuthRouter)
 }
