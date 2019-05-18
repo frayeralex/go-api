@@ -5,3 +5,4 @@ import (
 )
 
 var PORT = os.Getenv("PORT")
+var JWT_SECRET = os.Getenv("JWT_SECRET")
